@@ -13,7 +13,7 @@
 #endif
 
 #ifndef DEBUG
-#define DEBUG 1
+#define DEBUG 0
 #endif
 
 void print_buffer(void *ptr, size_t nmemb);
@@ -124,7 +124,7 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 /* returns 0 on success, returns 1 if something went wrong */
 char handle_exec(char *cmd, char *line, char **env)
 {
-	char *null_ptr[] __attribute__ ((unused)) = { NULL };
+	char *null_ptr[] = { NULL };
 	char *cargv[BUF_SIZE]; 		/* child argv */
 	int i;
 	char *full_exec_path = NULL;
@@ -180,7 +180,7 @@ char handle_exec(char *cmd, char *line, char **env)
 		}
 
 		/* Execute a program */
-		if (execve(full_exec_path, cargv, env) == -1)
+		if (execve(full_exec_path, cargv, null_ptr) == -1)
 		{
 			_free(line);
 			return (1);
