@@ -1,38 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <errno.h>
-#include <sys/wait.h> /* ~wait(2)~ */
-#include <string.h>   /* ~strtok(3)~ */
-#include <sys/stat.h> /* stat(2) */
-
 #include "header.h"
-
-#ifndef BUF_SIZE
-#define BUF_SIZE 256
-#endif
-
-#ifndef DEBUG
-#define DEBUG 0
-#endif
-
-void print_buffer(void *ptr, size_t nmemb);
-void print_horizontal_bar(unsigned long int n);
-void strip_newline(char *s, ssize_t read);
-char *get_fpath(char *cmd, char **env);
-void _memset(void *s, int c, size_t n);
-int _strncmp(char *s1, char *s2, int n);
-void print_grid(char **grid);
-void print_string(char *s);
-char handle_builtins(char *cmd, char *line, char **env);
-void _free(char *line);
-char handle_exec(char *cmd, char *line, char **env);
-int _strlen(const char *str);
-char *_strcat(char *dest, const char *src);
-char *_strcpy(char *dest, const char *src);
-char *_strdup(char *str);
-void canary();
-int atoi(const char *s);
 
 int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 {
@@ -81,6 +47,8 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 		/* handles newline (empty command) + checks for built in */
 		if (cmd != NULL && handle_builtins(cmd, line, env))
 		{
+			canary("exec begins");
+
 			/**
 			 * PROGRAM EXEC
 			 * fork() begins here
@@ -88,7 +56,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 
 			if (handle_exec(cmd, line, env))
 			{
-				canary();
+				canary("hello");
 				perror(argv[0]);
 				return (EXIT_FAILURE);
 			}
@@ -153,82 +121,22 @@ int atoi(const char *s)
 	return (res);
 }
 
-/* returns 0 on success, returns 1 if something went wrong */
-char handle_exec(char *cmd, char *line, char **env)
-{
-	char *null_ptr[] = { NULL };
-	char *cargv[BUF_SIZE]; 		/* child argv */
-	int i;
-	char *full_exec_path = NULL;
-	pid_t pid;
-	int status;
-
-	pid = fork();
-	if (pid == -1)
-	{
-		return (1);
-	}
-
-	if (pid != 0)
-	{
-		/* we're in the parent process */
-		/* printf("Parent start.\n"); */
-
-		/**
-		 * wait() waits for a child to terminate. Upon child
-		 * termination, wait() stores status information about
-		 * the child on the int to which it points.
-		 */
-		wait(&status);
-
-		/**
-		 * ~WIFEXITED~ is a macro to inspect ~status~. It
-		 * returns true if the child exited normally.
-		 */
-		if (WIFEXITED(status))
-		{
-			/* printf("Child terminated successfully.\n"); */
-		}
-	} else {
-		/* we're in the child process */
-
-		cargv[0] = cmd;
-
-		for (i = 0; i < BUF_SIZE - 1; i++)
-		{
-			if (cargv[i] == NULL)
-			{
-				break;
-			}
-
-			cargv[i + 1] = strtok(NULL, " \n");
-		}
-
-		/* Get absolute path */
-		if ((full_exec_path = get_fpath(cmd, env)) == NULL)
-		{
-			_free(line);
-			return (1);
-		}
-
-		/* Execute a program */
-		if (execve(full_exec_path, cargv, null_ptr) == -1)
-		{
-			_free(line);
-			return (1);
-		}
-	}
-
-	/* execve(line, null_ptr, null_ptr); */
-	return (0);
-}
-
 void _free(char *line)
 {
 	free(line);
 	line = NULL;
 }
 
+/**
+ * get_fpath - Looks for program in PATH.
+ *
+ * @cmd: program to search for
+ * @env: environment context
+ *
+ * Return: if program found in PATH, returns a string specifying full path to
+ * program. Otherwise, returns ~cmd~ unchanged (for relative path.). On memory
+ * error, returns NULL.
+ */
 /* get_fpath - On memory error, returns NULL */
 /* allocates a string in memory which must be freed by the calling function */
 char *get_fpath(char *cmd, char **env)
@@ -493,7 +401,7 @@ char *_strdup(char *str)
 	return str2 - length - 1; 	/* return the pointer */
 }
 
-void canary()
+void canary(const char *s)
 {
 	static int i = 0;
 
@@ -501,5 +409,7 @@ void canary()
 	{
 		i++;
 		printf("---%d---\n", i);
+		puts(s);
+		printf("-------\n");
 	}
 }
