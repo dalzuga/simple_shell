@@ -3,7 +3,7 @@
 int *print_prompt()
 {
 	int i;
-	char *prompt = "($) ";
+	char *prompt = "$ ";
 
 	i = 0;
 	while (prompt[i] != '\0') {
