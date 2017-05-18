@@ -27,11 +27,12 @@ void print_string(char *s);
 char handle_builtins(char *cmd, char *line, char **env);
 void _free(char *line);
 char handle_exec(char *cmd, char *line, char **env);
-int _strlen(char *str);
+int _strlen(const char *str);
 char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, const char *src);
 char *_strdup(char *str);
 void canary();
+int atoi(const char *s);
 
 int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 {
@@ -104,10 +105,20 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 	 * BUILT-INS
 	 */
 
+	char *arg = NULL;
+	int exitn;
+
 	/* printf("%lu\n", read); */
 
 	if (_strncmp(cmd, "exit", 5) == 0)
 	{
+		arg = strtok(NULL, " \n");
+		if (arg != NULL)
+		{
+			exitn = atoi(arg);
+			_free(line);
+			exit(exitn);
+		}
 		_free(line);
 		exit(EXIT_SUCCESS);
 	}
@@ -119,6 +130,27 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 	}
 
 	return (1);
+}
+
+int atoi(const char *s)
+{
+	/* declarations */
+	int i, len, base, res, digit;
+
+	/* inits */
+	res = 0;
+	base = 1;
+
+	len = _strlen(s);
+
+	for (i = 0; i < len; i++)
+	{
+		digit = s[len - i - 1] - 48;
+		res += digit * base;
+		base = base * 10;
+	}
+
+	return (res);
 }
 
 /* returns 0 on success, returns 1 if something went wrong */
@@ -383,7 +415,7 @@ void print_string(char *s)
 	}
 }
 
-int _strlen(char *str)
+int _strlen(const char *str)
 {
 	int i;			/* i used as a counter */
 
