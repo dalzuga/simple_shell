@@ -7,12 +7,18 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 	size_t len = 0;
 	ssize_t read = 0;
 	char *cmd = NULL;
+	int interactive;
 
 	fp = stdin;
 
+	interactive = _isinteractive();
+
 	while (1)
 	{
-		print_prompt();
+		if (interactive)
+		{
+			print_prompt();
+		}
 
 		read = getline(&line, &len, fp);
 		/* printf("Len: %lu\n", len); */
@@ -412,4 +418,25 @@ void canary(const char *s)
 		puts(s);
 		printf("-------\n");
 	}
+}
+
+/* returns 1 if interactive, 0 if pipe */
+int _isinteractive()
+{
+	struct stat st;
+
+	if (fstat(0, &st) == -1)
+	{
+		perror("fstat");
+		exit(EXIT_FAILURE);
+	}
+
+	if (S_ISFIFO(st.st_mode))
+	{
+		canary("pipe");
+		return (0);
+	}
+
+	canary("not pipe");
+	return (1);
 }

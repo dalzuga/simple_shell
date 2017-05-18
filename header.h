@@ -15,7 +15,7 @@
 #include <errno.h>
 #include <sys/wait.h> /* ~wait(2)~ */
 #include <string.h>   /* ~strtok(3)~ */
-#include <sys/stat.h> /* stat(2) */
+#include <sys/stat.h> /* ~stat(2)~ */
 
 /* this function prints the simple shell user prompt */
 int *print_prompt();
@@ -39,6 +39,6 @@ char *_strcpy(char *dest, const char *src);
 char *_strdup(char *str);
 void canary(const char *s);
 int atoi(const char *s);
-
+int _isinteractive();
 
 #endif
