@@ -53,8 +53,13 @@ char handle_exec(char *cmd, char *line, char **env)
 			cargv[i + 1] = strtok(NULL, " \n");
 		}
 
+		/* if relative path */
+		if (cmd[0] == '.')
+		{
+			full_exec_path = cmd;
+		}
 		/* Get absolute path */
-		if ((full_exec_path = get_fpath(cmd, env)) == NULL)
+		else if ((full_exec_path = get_fpath(cmd, env)) == NULL)
 		{
 			/* memory error in ~get_fpath()~ */
 			_free(line);
