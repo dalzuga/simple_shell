@@ -79,8 +79,8 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 	 * BUILT-INS
 	 */
 
+	int exitn, arglen;
 	char *arg = NULL;
-	int exitn;
 
 	/* printf("%lu\n", read); */
 
@@ -89,9 +89,15 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 		arg = strtok(NULL, " \n");
 		if (arg != NULL)
 		{
-			exitn = atoi(arg);
-			_free(line);
-			exit(exitn);
+			arglen = _strlen(arg);
+			if (valid_exitarg(arg, arglen) == 1)
+			{
+				exitn = _atoin(arg, arglen);
+				_free(line);
+				exit(exitn);
+			}
+			print_string("exit: Illegal number\n");
+			return (0);
 		}
 		_free(line);
 		exit(EXIT_SUCCESS);
@@ -106,16 +112,14 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 	return (1);
 }
 
-int atoi(const char *s)
+int _atoin(const char *s, int len)
 {
 	/* declarations */
-	int i, len, base, res, digit;
+	int i, base, res, digit;
 
 	/* inits */
 	res = 0;
 	base = 1;
-
-	len = _strlen(s);
 
 	for (i = 0; i < len; i++)
 	{
@@ -438,5 +442,20 @@ int _isinteractive()
 	}
 
 	canary("not pipe");
+	return (1);
+}
+
+int valid_exitarg(char *arg, int len)
+{
+	int i;
+
+	for (i = 0; i < len; i++)
+	{
+		if (arg[i] < '0' || arg[i] > '9')
+		{
+			return (0);
+		}
+	}
+
 	return (1);
 }

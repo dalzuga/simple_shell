@@ -38,7 +38,8 @@ char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, const char *src);
 char *_strdup(char *str);
 void canary(const char *s);
-int atoi(const char *s);
+int _atoin(const char *s, int len);
 int _isinteractive();
+int valid_exitarg(char *arg, int len);
 
 #endif
