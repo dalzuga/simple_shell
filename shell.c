@@ -1,4 +1,4 @@
-#include "../headers/header.h"
+#include "header.h"
 
 int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 {
