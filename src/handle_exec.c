@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../headers/header.h"
 
 /* returns 0 on success, returns 1 if something went wrong */
 char handle_exec(char *cmd, char *line, char **env)
