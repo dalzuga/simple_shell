@@ -37,12 +37,12 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 		return (0);
 	}
 
-	if (_strncmp(cmd, "#", 1) == 0)
+	if (_strncmp(cmd, "#", 2) == 0)
 	{
 		return (0);
 	}
 
-	if (_strncmp(cmd, "help", 4) == 0)
+	if (_strncmp(cmd, "help", 5) == 0)
 	{
 		print_help();
 		return (0);
@@ -50,14 +50,12 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 
 	if (_strncmp(cmd, "setenv", 7) == 0)
 	{
-		search_env(env, 0);
-		return (0);
+		return (_setenv(env));
 	}
 
 	if (_strncmp(cmd, "unsetenv", 9) == 0)
 	{
-		search_env(env, 1);
-		return (0);
+		return (_unsetenv(env));
 	}
 
 	return (1);

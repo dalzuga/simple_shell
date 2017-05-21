@@ -43,4 +43,13 @@ int _isinteractive();
 int valid_exitarg(char *arg, int len);
 void print_help();
 
+/* _cstrcmp - cut string compare */
+int _cstrcmp(const char *s1, const char *s2);
+
+/* _max - gives the max of two numbers */
+int _max(int n, int m);
+
+/* _min - gives the min of two numbers */
+int _min(int n, int m);
+
 #endif

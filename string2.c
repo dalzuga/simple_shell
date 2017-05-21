@@ -10,13 +10,19 @@
  * Return: 0 if cut strings are equal, > 0 if s1 is lexicographically greater,
  * < 0 if smaller.
  */
-int _cstrcmp(char *s1, char *s2)
+int _cstrcmp(const char *s1, const char *s2)
 {
 	int i, s1_len, s2_len, s_len;
 
 	s1_len = _strlen(s1);
 	s2_len = _strlen(s2);
-	s_len = _max(s1_len, s2_len);
+
+	/* printf("s1_len: %d\n", s1_len); */
+	/* printf("s2_len: %d\n", s2_len); */
+
+	s_len = _min(s1_len, s2_len);
+
+	/* printf("min: %d\n", s_len); */
 
 	for (i = 0; i < s_len; i++)
 	{
@@ -33,6 +39,17 @@ int _cstrcmp(char *s1, char *s2)
 int _max(int n, int m)
 {
 	if (n > m)
+	{
+		return n;
+	}
+
+	return m;
+}
+
+/* gives the min of two numbers */
+int _min(int n, int m)
+{
+	if (n < m)
 	{
 		return n;
 	}
