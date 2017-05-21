@@ -15,14 +15,14 @@ int _setenv(char **env)
 	envvar = strtok(NULL, " ");
 	if (envvar == NULL)
 	{
-		perror("missing argument");
+		print_error("missing argument\n");
 		return (1);
 	}
 
 	envval = strtok(NULL, " ");
 	if (envval == NULL)
 	{
-		perror("missing value");
+		print_error("missing value\n");
 		return (1);
 	}
 
@@ -55,8 +55,49 @@ int _setenv_func(char **env, char *envvar, char *envval)
 	}
 
 	/* variable does not exist */
+	printf("current env size: %d\n", i);
+
+	env = grow_env(env, i);
+	if (env == NULL)
+	{
+		perror("grow_env");
+		return (1);
+	}
+
 	env[i] = new_path_str(envvar, envval);
 	env[++i] = NULL;
 
 	return (0);
+}
+
+/**
+ * grow_env - grow env by one, copy all the present key-value pairs
+ *
+ * @env: the current environment
+ * @env_size: the size of the current environment, not including NULL
+ * terminating pointer.
+ *
+ * Return: the new environment, NULL on memory error.
+ */
+char **grow_env(char **env, int env_size)
+{
+	int i;
+	char **new_env;
+
+	/* grow environment by one + NULL pointer => grow by 2 */
+	new_env = malloc(sizeof(char *) * (env_size + 2));
+	if (new_env == NULL)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+
+	/* copy all the PATH key-value pairs to new environment */
+	for (i = 0; i < env_size; i++)
+	{
+		new_env[i] = env[i];
+	}
+
+	/* return new environment */
+	return (new_env);
 }

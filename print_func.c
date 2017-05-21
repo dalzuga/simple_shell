@@ -9,6 +9,14 @@ void print_string(char *s)
 	}
 }
 
+void print_error(char *s)
+{
+	while (*s != '\0')
+	{
+		write(STDERR_FILENO, s, 1);
+		s++;
+	}
+}
 
 void print_horizontal_bar(unsigned long int n)
 {
