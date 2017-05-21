@@ -51,7 +51,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 
 		cmd = strtok(line, " \n");
 		/* handles newline (empty command) + checks for built in */
-		if (cmd != NULL && handle_builtins(cmd, line, env))
+		if (cmd != NULL && handle_builtins(cmd, line, &env))
 		{
 			canary("exec begins");
 

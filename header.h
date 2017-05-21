@@ -33,7 +33,7 @@ void print_grid(char **grid);
 void print_string(char *s);
 void print_error(char *s);
 
-char handle_builtins(char *cmd, char *line, char **env);
+char handle_builtins(char *cmd, char *line, char ***env);
 void _free(char *line);
 char handle_exec(char *cmd, char *line, char **env);
 int _strlen(const char *str);
@@ -56,10 +56,10 @@ int _max(int n, int m);
 int _min(int n, int m);
 
 /* _setenv - set an environment variable */
-int _setenv(char **env);
+int _setenv(char ***env);
 
 /* _setenv_func - helper to _setenv */
-int _setenv_func(char **env, char *envvar, char *envval);
+int _setenv_func(char ***env, char *envvar, char *envval);
 
 /* grow_env - grow env by one, copy all the present key-value pairs */
 char **grow_env(char **env, int env_size);

@@ -7,7 +7,7 @@
  *
  * Return: 0 on success, 1 otherwise.
  */
-int _setenv(char **env)
+int _setenv(char ***env)
 {
 	/* declarations */
 	char *envvar, *envval;
@@ -38,18 +38,19 @@ int _setenv(char **env)
  *
  * Return: 0 on success, 1 otherwise.
  */
-int _setenv_func(char **env, char *envvar, char *envval)
+int _setenv_func(char ***env, char *envvar, char *envval)
 {
 	/* declarations */
+	char **new_env;
 	int i;
 
-	for (i = 0; env[i] != NULL; i++)
+	for (i = 0; (*env)[i] != NULL; i++)
 	{
 		/* variable exists */
-		if (_cstrcmp(env[i], envvar) == 0)
+		if (_cstrcmp((*env)[i], envvar) == 0)
 		{
-			free(env[i]);
-			env[i] = new_path_str(envvar, envval);
+			free((*env)[i]);
+			(*env)[i] = new_path_str(envvar, envval);
 			return (0);
 		}
 	}
@@ -57,15 +58,18 @@ int _setenv_func(char **env, char *envvar, char *envval)
 	/* variable does not exist */
 	printf("current env size: %d\n", i);
 
-	env = grow_env(env, i);
+	new_env = grow_env(*env, i);
 	if (env == NULL)
 	{
 		perror("grow_env");
 		return (1);
 	}
 
-	env[i] = new_path_str(envvar, envval);
-	env[++i] = NULL;
+	free(*env);
+	env = &new_env;
+
+	(*env)[i] = new_path_str(envvar, envval);
+	(*env)[++i] = NULL;
 
 	return (0);
 }
@@ -85,14 +89,14 @@ char **grow_env(char **env, int env_size)
 	char **new_env;
 
 	/* grow environment by one + NULL pointer => grow by 2 */
-	new_env = malloc(sizeof(char *) * (env_size + 2));
+	new_env = malloc(sizeof(char **) * (env_size + 2));
 	if (new_env == NULL)
 	{
 		perror("malloc");
 		return (NULL);
 	}
 
-	/* copy all the PATH key-value pairs to new environment */
+	/* copy all the pointers to strings to new environment */
 	for (i = 0; i < env_size; i++)
 	{
 		new_env[i] = env[i];
