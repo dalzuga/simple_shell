@@ -50,12 +50,13 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 
 	if (_strncmp(cmd, "setenv", 7) == 0)
 	{
-		return (_setenv(env));
+		_setenv(env);
+		return (0);
 	}
 
 	if (_strncmp(cmd, "unsetenv", 9) == 0)
 	{
-		return (_unsetenv(env));
+		return (0);
 	}
 
 	return (1);

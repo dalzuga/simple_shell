@@ -52,4 +52,13 @@ int _max(int n, int m);
 /* _min - gives the min of two numbers */
 int _min(int n, int m);
 
+/* _setenv - set an environment variable */
+int _setenv(char **env);
+
+/* _setenv_func - helper to _setenv */
+int _setenv_func(char **env, char *envvar, char *envval);
+
+/* new string with format "variable" + '=' + "value", like in PATH */
+char *new_path_str(char *envvar, char* envval);
+
 #endif

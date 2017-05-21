@@ -1,6 +1,13 @@
 #include "header.h"
 
-/* new string with format "variable" + '=' + "value", like in PATH */
+/**
+ * new_path_str - new string with format "variable" + '=' + "value"
+ *
+ * @envvar: environment variable name
+ * @envval: environment variable value
+ *
+ * Return: the new PATH string.
+ */
 char *new_path_str(char *envvar, char* envval)
 {
 	int envvar_len, envval_len;
