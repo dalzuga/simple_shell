@@ -83,13 +83,15 @@ char *get_fpath(char *cmd, char **env)
 		if (stat(full_cmd_path, &st) == 0)
 		{
 			/* printf("token: %s\n", token); */
+			_free(PATH_value);
 			return (full_cmd_path);
 		}
 
-		free(full_cmd_path);
+		_free(full_cmd_path);
 
 		token = strtok(NULL, ":");
 	}
 
+	_free(PATH_value);
 	return (cmd);
 }

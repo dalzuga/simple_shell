@@ -3,7 +3,6 @@
 void _free(char *line)
 {
 	free(line);
-	line = NULL;
 }
 
 /* see ~memset(3)~ */
