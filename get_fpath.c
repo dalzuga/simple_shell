@@ -14,8 +14,9 @@
 /* allocates a string in memory which must be freed by the calling function */
 char *get_fpath(char *cmd, char **env)
 {
-	int i, j;
-	char PATH_envval[BUF_SIZE];
+	unsigned long int i, j;
+	char *PATH_value;
+	unsigned long int PATH_value_len = 0;
 	char *token;
 	char *full_cmd_path;
 	long unsigned int full_cmd_len;
@@ -27,22 +28,35 @@ char *get_fpath(char *cmd, char **env)
 	}
 
 	/* find PATH env var */
-	for (i = 0; ; i++)
+	for (i = 0; env[i] != NULL ; i++)
 	{
 		if (_strncmp(env[i], "PATH=", 5) == 0)
 		{
+			PATH_value_len = _strlen(env[i]) - 4;
+			PATH_value = malloc(sizeof(char) * PATH_value_len);
+			if (PATH_value == NULL)
+			{
+				perror("malloc");
+				exit(EXIT_FAILURE);
+			}
 			break;
 		}
 	}
 
-	/* copy the value of ~$PATH~ onto ~PATH_envval~ */
-	for (j = 5; j < BUF_SIZE + 5; j++)
+	/* PATH variable not found */
+	if (PATH_value == NULL)
 	{
-		PATH_envval[j-5] = env[i][j];
+		return (cmd);
+	}
+
+	/* copy the value of ~$PATH~ onto ~PATH_value~ */
+	for (j = 5; j < PATH_value_len; j++)
+	{
+		PATH_value[j-5] = env[i][j];
 	}
 
 	/* let's check each directory */
-	token = strtok(PATH_envval, ":");
+	token = strtok(PATH_value, ":");
 	while (token != NULL)
 	{
 		/* check for path: token + "/" + cmd + '\0' */
