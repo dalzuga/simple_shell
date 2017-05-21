@@ -83,7 +83,10 @@ char *get_fpath(char *cmd, char **env)
 		if (stat(full_cmd_path, &st) == 0)
 		{
 			/* printf("token: %s\n", token); */
+
+			/* valgrind does not notice if this free is missing */
 			_free(PATH_value);
+
 			return (full_cmd_path);
 		}
 
