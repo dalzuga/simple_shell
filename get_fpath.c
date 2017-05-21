@@ -50,7 +50,7 @@ char *get_fpath(char *cmd, char **env)
 	}
 
 	/* copy the value of ~$PATH~ onto ~PATH_value~ */
-	for (j = 5; j < PATH_value_len; j++)
+	for (j = 5; j < PATH_value_len + 5; j++)
 	{
 		PATH_value[j-5] = env[i][j];
 	}
