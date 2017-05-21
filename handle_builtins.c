@@ -37,5 +37,10 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 		return (0);
 	}
 
+	if (_strncmp(cmd, "#", 1) == 0)
+	{
+		return (0);
+	}
+
 	return (1);
 }
