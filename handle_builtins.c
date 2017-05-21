@@ -42,5 +42,11 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char **env)
 		return (0);
 	}
 
+	if (_strncmp(cmd, "help", 4) == 0)
+	{
+		print_help();
+		return (0);
+	}
+
 	return (1);
 }

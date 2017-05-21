@@ -41,5 +41,6 @@ void canary(const char *s);
 int _atoin(const char *s, int len);
 int _isinteractive();
 int valid_exitarg(char *arg, int len);
+void print_help();
 
 #endif
