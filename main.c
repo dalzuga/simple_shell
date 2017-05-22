@@ -57,7 +57,6 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 		/* handles newline (empty command) + checks for built in */
 		if (cmd != NULL && handle_builtins(cmd, line, &env))
 		{
-			printf("exec begins\n");
 			canary("exec begins");
 
 			/**
