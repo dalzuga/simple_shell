@@ -57,6 +57,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 		/* handles newline (empty command) + checks for built in */
 		if (cmd != NULL && handle_builtins(cmd, line, &env))
 		{
+			printf("exec begins\n");
 			canary("exec begins");
 
 			/**
@@ -67,6 +68,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 			if (handle_exec(cmd, line, env))
 			{
 				canary("hello");
+				free_env(env);
 				perror(argv[0]);
 				return (EXIT_FAILURE);
 			}
