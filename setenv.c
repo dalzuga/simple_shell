@@ -41,7 +41,7 @@ int _setenv(char ***env)
 int _setenv_func(char ***env, char *envvar, char *envval)
 {
 	/* declarations */
-	char **new_env __attribute__((unused));
+	char **new_env;
 	int i;
 
 	for (i = 0; (*env)[i] != NULL; i++)
@@ -55,21 +55,24 @@ int _setenv_func(char ***env, char *envvar, char *envval)
 		}
 	}
 
-	/* /\* variable does not exist *\/ */
-	/* printf("current env size: %d\n", i); */
+	printf("current env size: %d\n", i);
 
-	/* new_env = grow_env(*env, i); */
-	/* if (env == NULL) */
-	/* { */
-	/* 	perror("grow_env"); */
-	/* 	return (1); */
-	/* } */
+	/* variable does not exist */
+	new_env = grow_env(*env, i);
+	if (env == NULL)
+	{
+		perror("grow_env");
+		return (1);
+	}
 
-	/* free_env(*env); */
-	/* env = &new_env; */
+	print_grid(new_env);
+	env = &new_env;
+	/* print_grid(*env); */
 
-	/* (*env)[i] = new_path_str(envvar, envval); */
-	/* (*env)[++i] = NULL; */
+	(*env)[i] = new_path_str(envvar, envval);
+	printf("%s\n", (*env)[i]);
+
+	(*env)[++i] = NULL;
 
 	return (0);
 }
