@@ -12,14 +12,14 @@ int _setenv(char ***env)
 	/* declarations */
 	char *envvar, *envval;
 
-	envvar = strtok(NULL, " ");
+	envvar = strtok(NULL, " \n");
 	if (envvar == NULL)
 	{
 		print_error("missing argument\n");
 		return (1);
 	}
 
-	envval = strtok(NULL, " ");
+	envval = strtok(NULL, " \n");
 	if (envval == NULL)
 	{
 		print_error("missing value\n");
