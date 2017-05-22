@@ -34,7 +34,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 			return (EXIT_FAILURE);
 		}
 
-		/* handle EOF */
+		/* handle Ctrl+D */
 		if (read == EOF)
 		{
 			_free(line);
