@@ -24,13 +24,18 @@ int main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 	for (i = 0; i < env_len; i++)
 	{
 		tmp_env[i] = _strdup(env[i]);
+		if (tmp_env[i] == NULL)
+		{
+			perror("strdup");
+			exit(EXIT_FAILURE);
+		}
 	}
 
-	env = tmp_env;
+	tmp_env[++i] = NULL;
 
-	for (i = 0; i < env_len; i++)
+	for (i = 0; i < env_len + 1; i++)
 	{
-		printf("%s\n", env[i]);
+		printf("tmp_env[%d]: %s\n", i, tmp_env[i]);
 	}
 
 	return (0);
