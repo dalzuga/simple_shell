@@ -14,12 +14,12 @@
 /* allocates a string in memory which must be freed by the calling function */
 char *get_fpath(char *cmd, char **env)
 {
-	unsigned long int i, j;
-	char *PATH_value;
+	unsigned long int i = 0, j = 0;
+	char *PATH_value = NULL;
 	unsigned long int PATH_value_len = 0;
-	char *token;
-	char *full_cmd_path;
-	long unsigned int full_cmd_len;
+	char *token = NULL;
+	char *full_cmd_path = NULL;
+	long unsigned int full_cmd_len = 0;
 	struct stat st;
 
 	if (cmd[0] == '/')
