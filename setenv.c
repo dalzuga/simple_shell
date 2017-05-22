@@ -105,35 +105,3 @@ char **grow_env(char **env, int env_size)
 	/* return new environment */
 	return (new_env);
 }
-
-char **replicate_env(char **env)
-{
-	int i;
-	int env_len;
-	char **tmp_env;
-
-	i = 0;
-	while (env[i] != NULL)
-	{
-		i++;
-	}
-	env_len = i;
-
-	printf("env_len: %d\n", env_len);
-
-	tmp_env = malloc(sizeof(char **) * (env_len + 1));
-
-	for (i = 0; i < env_len; i++)
-	{
-		tmp_env[i] = _strdup(env[i]);
-	}
-
-	env = tmp_env;
-
-	for (i = 0; i < env_len; i++)
-	{
-		printf("%s\n", env[i]);
-	}
-
-	return (0);
-}

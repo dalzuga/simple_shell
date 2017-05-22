@@ -13,6 +13,10 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 
 	interactive = _isinteractive();
 
+	/* take control of environment */
+	env = replicate_env(env);
+	free_env(env);
+
 	while (1)
 	{
 		if (interactive)

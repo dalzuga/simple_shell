@@ -67,4 +67,9 @@ char **grow_env(char **env, int env_size);
 /* new string with format "variable" + '=' + "value", like in PATH */
 char *new_path_str(char *envvar, char* envval);
 
+/* replicate_env - duplicate the environment */
+char **replicate_env(char **env);
+
+void free_env(char **env);
+
 #endif
