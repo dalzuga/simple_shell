@@ -15,7 +15,6 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 
 	/* take control of environment */
 	env = replicate_env(env);
-	free_env(env);
 
 	while (1)
 	{
@@ -39,6 +38,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 		if (read == EOF)
 		{
 			_free(line);
+			free_env(env);
 
 			if (errno == 0)
 			{

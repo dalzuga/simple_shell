@@ -14,13 +14,14 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char ***env
 
 	if (_strncmp(cmd, "exit", 5) == 0)
 	{
-		arg = strtok(NULL, " ");
+		arg = strtok(NULL, " \n");
 		if (arg != NULL)
 		{
 			arglen = _strlen(arg);
 			if (valid_exitarg(arg, arglen) == 1)
 			{
 				exitn = _atoin(arg, arglen);
+				free_env(*env);
 				_free(line);
 				exit(exitn);
 			}
@@ -28,6 +29,7 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char ***env
 			return (0);
 		}
 		_free(line);
+		free_env(*env);
 		exit(EXIT_SUCCESS);
 	}
 
