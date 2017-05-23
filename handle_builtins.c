@@ -52,9 +52,7 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char ***env
 
 	if (_strncmp(cmd, "setenv", 7) == 0)
 	{
-		printf("before -- env: %p\n", (void *) *env);
 		_setenv(env);
-		printf("after -- env: %p\n", (void *) *env);
 		return (0);
 	}
 
