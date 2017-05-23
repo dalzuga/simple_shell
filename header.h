@@ -35,7 +35,7 @@ void print_error(char *s);
 
 char handle_builtins(char *cmd, char *line, char ***env);
 void _free(char *line);
-char handle_exec(char *cmd, char *line, char **env);
+char handle_exec(char *cmd, char *line, char ***env);
 int _strlen(const char *str);
 char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, const char *src);

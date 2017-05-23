@@ -1,7 +1,7 @@
 #include "header.h"
 
 /* returns 0 on success, returns 1 if something went wrong */
-char handle_exec(char *cmd, char *line, char **env)
+char handle_exec(char *cmd, char *line, char ***env)
 {
 	/* char *null_ptr[] = { NULL }; */
 	char *cargv[BUF_SIZE]; 		/* child argv */
@@ -59,7 +59,7 @@ char handle_exec(char *cmd, char *line, char **env)
 			full_exec_path = cmd;
 		}
 		/* Get absolute path */
-		else if ((full_exec_path = get_fpath(cmd, env)) == NULL)
+		else if ((full_exec_path = get_fpath(cmd, *env)) == NULL)
 		{
 			/* memory error in ~get_fpath()~ */
 			_free(line);
@@ -67,7 +67,7 @@ char handle_exec(char *cmd, char *line, char **env)
 		}
 
 		/* Execute a program */
-		if (execve(full_exec_path, cargv, env) == -1)
+		if (execve(full_exec_path, cargv, *env) == -1)
 		{
 			canary("child execve");
 			_free(line);

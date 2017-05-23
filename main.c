@@ -64,7 +64,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 			 * fork() begins here
 			 */
 
-			if (handle_exec(cmd, line, env))
+			if (handle_exec(cmd, line, &env))
 			{
 				canary("hello");
 				free_env(env);
