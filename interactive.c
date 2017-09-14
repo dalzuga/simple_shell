@@ -1,7 +1,7 @@
 #include "header.h"
 
 /* returns 1 if interactive, 0 if pipe */
-int _isinteractive()
+int _isinteractive(void)
 {
 	struct stat st;
 

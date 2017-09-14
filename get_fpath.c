@@ -52,7 +52,7 @@ char *get_fpath(char *cmd, char **env)
 	/* copy the value of ~$PATH~ onto ~PATH_value~ */
 	for (j = 5; j < PATH_value_len + 5; j++)
 	{
-		PATH_value[j-5] = env[i][j];
+		PATH_value[j - 5] = env[i][j];
 	}
 
 	/* let's check each directory */
@@ -68,7 +68,7 @@ char *get_fpath(char *cmd, char **env)
 		if (full_cmd_path == NULL)
 		{
 			perror("malloc");
-			return NULL;
+			return (NULL);
 		}
 
 		_memset(full_cmd_path, 0, full_cmd_len);

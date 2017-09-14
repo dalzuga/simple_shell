@@ -8,7 +8,7 @@
  *
  * Return: the new PATH string.
  */
-char *new_path_str(char *envvar, char* envval)
+char *new_path_str(char *envvar, char *envval)
 {
 	int envvar_len, envval_len, path_len = 0;
 	char *path_str;

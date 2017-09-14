@@ -40,10 +40,10 @@ int _max(int n, int m)
 {
 	if (n > m)
 	{
-		return n;
+		return (n);
 	}
 
-	return m;
+	return (m);
 }
 
 /* gives the min of two numbers */
@@ -51,8 +51,8 @@ int _min(int n, int m)
 {
 	if (n < m)
 	{
-		return n;
+		return (n);
 	}
 
-	return m;
+	return (m);
 }

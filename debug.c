@@ -2,7 +2,7 @@
 
 void canary(const char *s)
 {
-	static int i = 0;
+	static int i;
 
 	if (DEBUG)
 	{
@@ -30,7 +30,9 @@ void print_buffer(void *ptr, size_t nmemb)
 		if (*tmp_ptr == 10)
 		{
 			write(1, "\\n", 2);
-		} else {
+		}
+		else
+		{
 			write(1, tmp_ptr, 1);
 		}
 		write(1, " |", 3);
@@ -50,7 +52,9 @@ void print_buffer(void *ptr, size_t nmemb)
 		{
 			printf("%3d |", *tmp_ptr);
 			fflush(stdout);
-		} else {
+		}
+		else
+		{
 			printf("%3d|", *tmp_ptr);
 			fflush(stdout);
 		}

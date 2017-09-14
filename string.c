@@ -17,7 +17,7 @@ int _strncmp(char *s1, char *s2, int n)
 		}
 	}
 
-	return(s1[i] - s2[i]); /* return difference in chars */
+	return (s1[i] - s2[i]); /* return difference in chars */
 }
 
 int _strlen(const char *str)
@@ -26,8 +26,9 @@ int _strlen(const char *str)
 
 	i = 0;			/* initialize at 0 */
 
-        /* while string isn't over */
-	while (*str != '\0') {
+	/* while string isn't over */
+	while (*str != '\0')
+	{
 		i++;		/* increase counter */
 		str++;		/* pointer arithmetic for next char */
 	}
@@ -80,7 +81,7 @@ char *_strdup(char *str)
 
 	str = str - length; 		/* pointer arithmetic to first element */
 
-	str2 = malloc( sizeof(char) * (length + 1) ); /* assign the memory */
+	str2 = malloc(sizeof(char) * (length + 1)); /* assign the memory */
 
 	if (str2 == NULL)	/* check the memory */
 	{
@@ -95,5 +96,5 @@ char *_strdup(char *str)
 		str2++;			/* char */
 	}
 
-	return str2 - length - 1; 	/* return the pointer */
+	return (str2 - length - 1); 	/* return the pointer */
 }

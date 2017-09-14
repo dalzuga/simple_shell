@@ -1,6 +1,6 @@
 #include "header.h"
 
-void print_help()
+void print_help(void)
 {
 	print_string("SUPPORTED COMMANDS\n");
 

@@ -6,9 +6,10 @@ int *print_prompt()
 	char *prompt = "$ ";
 
 	i = 0;
-	while (prompt[i] != '\0') {
+	while (prompt[i] != '\0')
+	{
 		print_char(prompt[i]);
 		++i;
 	}
-	return 0;
+	return (0);
 }

@@ -38,7 +38,9 @@ char handle_exec(char *cmd, char *line, char ***env)
 		{
 			/* printf("Child terminated successfully.\n"); */
 		}
-	} else {
+	}
+	else
+	{
 		/* we're in the child process */
 
 		cargv[0] = cmd;
@@ -59,11 +61,16 @@ char handle_exec(char *cmd, char *line, char ***env)
 			full_exec_path = cmd;
 		}
 		/* Get absolute path */
-		else if ((full_exec_path = get_fpath(cmd, *env)) == NULL)
+		else
 		{
-			/* memory error in ~get_fpath()~ */
-			_free(line);
-			return (1);
+			full_exec_path = get_fpath(cmd, *env);
+
+			if (full_exec_path == NULL)
+			{
+				/* memory error in ~get_fpath()~ */
+				_free(line);
+				return (1);
+			}
 		}
 
 		/* Execute a program */

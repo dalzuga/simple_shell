@@ -42,9 +42,9 @@ char *_strcpy(char *dest, const char *src);
 char *_strdup(char *str);
 void canary(const char *s);
 int _atoin(const char *s, int len);
-int _isinteractive();
+int _isinteractive(void);
 int valid_exitarg(char *arg, int len);
-void print_help();
+void print_help(void);
 
 /* _cstrcmp - cut string compare */
 int _cstrcmp(const char *s1, const char *s2);
@@ -65,7 +65,7 @@ int _setenv_func(char ***env, char *envvar, char *envval);
 char **grow_env(char **env, int env_size);
 
 /* new string with format "variable" + '=' + "value", like in PATH */
-char *new_path_str(char *envvar, char* envval);
+char *new_path_str(char *envvar, char *envval);
 
 /* replicate_env - duplicate the environment */
 char **replicate_env(char **env);
