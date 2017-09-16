@@ -65,9 +65,7 @@ int _setenv_func(char ***env, char *envvar, char *envval)
 		return (1);
 	}
 
-	print_grid(new_env);
-	env = &new_env;
-	/* print_grid(*env); */
+	*env = new_env;
 
 	(*env)[i] = new_path_str(envvar, envval);
 	printf("%s\n", (*env)[i]);
@@ -91,7 +89,7 @@ char **grow_env(char **env, int env_size)
 	int i;
 	char **new_env;
 
-	/* grow environment by one + NULL pointer => grow by 2 */
+	/* grow environment by one + NULL pointer */
 	new_env = malloc(sizeof(char **) * (env_size + 2));
 	if (new_env == NULL)
 	{
