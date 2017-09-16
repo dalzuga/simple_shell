@@ -54,6 +54,7 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)),
 
 	if (_strncmp(cmd, "unsetenv", 9) == 0)
 	{
+		_unsetenv(env);
 		return (0);
 	}
 
