@@ -75,4 +75,7 @@ void free_env(char **env);
 
 void interrupt_handler(int signum);
 
+/* handle_comments - strips the comment section of line */
+void handle_comments(char *line);
+
 #endif

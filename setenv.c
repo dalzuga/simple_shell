@@ -55,7 +55,8 @@ int _setenv_func(char ***env, char *envvar, char *envval)
 		}
 	}
 
-	printf("current env size: %d\n", i);
+	if (DEBUG == 1)
+		printf("old env size: %d\n", i);
 
 	/* variable does not exist */
 	new_env = grow_env(*env, i);
@@ -73,6 +74,9 @@ int _setenv_func(char ***env, char *envvar, char *envval)
 	printf("%s\n", (*env)[i]);
 
 	(*env)[++i] = NULL;
+
+	if (DEBUG == 1)
+		printf("new env size: %d\n", i);
 
 	return (0);
 }
