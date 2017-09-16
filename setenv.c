@@ -65,6 +65,8 @@ int _setenv_func(char ***env, char *envvar, char *envval)
 		return (1);
 	}
 
+	free(*env);
+
 	*env = new_env;
 
 	(*env)[i] = new_path_str(envvar, envval);
