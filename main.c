@@ -16,8 +16,14 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 	/* take control of environment */
 	env = replicate_env(env);
 
+	if (signal(SIGINT, interrupt_handler) == SIG_IGN)
+	{
+		signal(SIGINT, SIG_IGN);
+	}
+
 	while (1)
 	{
+
 		if (interactive)
 		{
 			print_prompt();

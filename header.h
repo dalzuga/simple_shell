@@ -16,6 +16,7 @@
 #include <sys/wait.h> /* ~wait(2)~ */
 #include <string.h>   /* ~strtok(3)~ */
 #include <sys/stat.h> /* ~stat(2)~ */
+#include <signal.h>   /* signal(2) */
 
 /* this function prints the simple shell user prompt */
 int *print_prompt();
@@ -71,5 +72,7 @@ char *new_path_str(char *envvar, char *envval);
 char **replicate_env(char **env);
 
 void free_env(char **env);
+
+void interrupt_handler(int signum);
 
 #endif
