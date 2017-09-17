@@ -82,4 +82,6 @@ int _unsetenv(char ***env);
 
 int _strcmp(const char *s1, const char *s2);
 
+void shrink_env(char ***env, int del);
+
 #endif

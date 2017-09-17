@@ -13,7 +13,7 @@ char **replicate_env(char **env)
 	}
 	env_len = i;
 
-	tmp_env = malloc(sizeof(char **) * (env_len + 1));
+	tmp_env = malloc(sizeof(char *) * (env_len + 1));
 
 	for (i = 0; i < env_len; i++)
 	{
