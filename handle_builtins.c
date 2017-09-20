@@ -1,7 +1,8 @@
 #include "header.h"
 
 /* returns 0 if user command is a built-in, 1 otherwise */
-char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char ***env)
+char handle_builtins(char *cmd, char *line __attribute__ ((unused)),
+		     char ***env)
 {
 	/**
 	 * BUILT-INS
@@ -39,11 +40,6 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char ***env
 		return (0);
 	}
 
-	if (_strncmp(cmd, "#", 2) == 0)
-	{
-		return (0);
-	}
-
 	if (_strncmp(cmd, "help", 5) == 0)
 	{
 		print_help();
@@ -58,6 +54,7 @@ char handle_builtins(char *cmd, char *line __attribute__ ((unused)), char ***env
 
 	if (_strncmp(cmd, "unsetenv", 9) == 0)
 	{
+		_unsetenv(env);
 		return (0);
 	}
 

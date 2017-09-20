@@ -59,6 +59,8 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char **env)
 		/* printf("Read: %d\n", (int) read); */
 		/* print_buffer(line, read); */
 
+		handle_comments(line);
+
 		cmd = strtok(line, " \n");
 		/* handles newline (empty command) + checks for built in */
 		if (cmd != NULL && handle_builtins(cmd, line, &env))
